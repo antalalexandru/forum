@@ -45,4 +45,10 @@ public class MemberController {
         this.members.put(id, member);
     }*/
 
+    @PostMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void modifyMember(@PathVariable(value="id") Integer id, @RequestBody Member member) {
+        System.out.println(member.toString());
+    }
+
 }
