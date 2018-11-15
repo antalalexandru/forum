@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("member")
 public class MemberController {
-
+/*
     private HashMap<Integer, Member> members = new HashMap<Integer, Member>() {{
         put(1, Member.builder().id(1).name("Andrei").build());
         put(2, Member.builder().id(2).name("Mihai").build());
@@ -37,12 +37,12 @@ public class MemberController {
     public void deleteMember(@PathVariable(value="id") Integer id) {
         this.members.remove(id);
     }
-
-    @PostMapping("/{id}")
+*/
+    /*@PostMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void modifyMember(@PathVariable(value="id") Integer id, @RequestBody Member member) {
         member.setID(id);
         this.members.put(id, member);
-    }
+    }*/
 
 }

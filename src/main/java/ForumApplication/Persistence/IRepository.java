@@ -1,7 +1,5 @@
 package ForumApplication.Persistence;
 
-import ForumApplication.Model.ID;
-
-public interface IRepository<T extends ID> {
-
+public interface IRepository<T> {
+    void add(T element);
 }
