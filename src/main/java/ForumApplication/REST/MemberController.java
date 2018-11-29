@@ -1,12 +1,11 @@
 package ForumApplication.REST;
 
-import ForumApplication.Model.Member;
+import ForumApplication.Model.Member.Member;
+import ForumApplication.Persistence.MemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -44,6 +43,15 @@ public class MemberController {
         member.setID(id);
         this.members.put(id, member);
     }*/
+
+    @Autowired
+    private MemberRepository memberRepository;
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<Member> getMembers() {
+        return memberRepository.getAllMembers();
+    }
 
     @PostMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)

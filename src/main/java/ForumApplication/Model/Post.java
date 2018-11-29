@@ -1,5 +1,6 @@
 package ForumApplication.Model;
 
+import ForumApplication.Model.Member.Member;
 import lombok.*;
 
 @Data

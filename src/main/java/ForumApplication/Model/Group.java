@@ -14,7 +14,12 @@ import java.sql.SQLException;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Group implements RowMapper<Group> {
-    @NonNull
+
+    private final static String ID_MAPPER = "group_id";
+    private final static String NAME_MAPPER = "g_name";
+    private final static String PREFIX_MAPPER = "prefix";
+    private final static String SUFFIX_MAPPER = "suffix";
+
     private Integer id;
 
     private String name;
@@ -25,6 +30,11 @@ public class Group implements RowMapper<Group> {
 
     @Override
     public Group mapRow(ResultSet rs, int rowNum) throws SQLException {
-        throw new NotImplementedException();
+        return Group.builder()
+                .id(rs.getInt(ID_MAPPER))
+                .name(rs.getString(NAME_MAPPER))
+                .prefixFormatting(rs.getString(PREFIX_MAPPER))
+                .suffixFormatting(rs.getString(SUFFIX_MAPPER))
+                .build();
     }
 }
