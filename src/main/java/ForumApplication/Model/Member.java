@@ -1,35 +1,56 @@
 package ForumApplication.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
+import org.springframework.jdbc.core.RowMapper;
 
-@Data
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+@Getter
+@Setter
+@Builder
+@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @ToString
-@EqualsAndHashCode
-public class Member {
+public class Member implements RowMapper<Member> {
 
-    /**
-     * Member id
-     * */
-    @NonNull
+    private final static String ID_MAPPER = "id";
+    private final static String NAME_MAPPER = "name";
+    private final static String PASSWORD_MAPPER = "password";
+    private final static String EMAIL_MAPPER = "email";
+    private final static String LAST_ACCESS_MAPPER = "last_active";
+    private final static String WARNING_PONTS_MAPPER = "warning_ponts";
+
     private Integer id;
 
     private String name;
 
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String email;
 
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String hashedPassword;
 
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Long lastActive;
 
     private Group group;
 
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Integer warningPoints;
+
+    @Override
+    public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
+        return Member.builder()
+                .id(rs.getInt(ID_MAPPER))
+                .name(rs.getString(NAME_MAPPER))
+                .hashedPassword(rs.getString(PASSWORD_MAPPER))
+                .email(rs.getString(EMAIL_MAPPER))
+                .group(new Group().mapRow(rs, rowNum))
+                .lastActive(rs.getLong(LAST_ACCESS_MAPPER))
+                .warningPoints(rs.getInt(WARNING_PONTS_MAPPER))
+                .build();
+    }
 }
