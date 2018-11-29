@@ -13,7 +13,7 @@ import java.sql.SQLException;
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@ToString // TODO TEMPORARY
 public class Member implements RowMapper<Member> {
 
     private final static String ID_MAPPER = "id";
@@ -25,17 +25,19 @@ public class Member implements RowMapper<Member> {
 
     private Integer id;
 
+    @NonNull
     private String name;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String email;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private String hashedPassword;
+    private String password;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Long lastActive;
 
+    @NonNull
     private Group group;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -46,7 +48,7 @@ public class Member implements RowMapper<Member> {
         return Member.builder()
                 .id(rs.getInt(ID_MAPPER))
                 .name(rs.getString(NAME_MAPPER))
-                .hashedPassword(rs.getString(PASSWORD_MAPPER))
+                .password(rs.getString(PASSWORD_MAPPER))
                 .email(rs.getString(EMAIL_MAPPER))
                 .group(new Group().mapRow(rs, rowNum))
                 .lastActive(rs.getLong(LAST_ACCESS_MAPPER))
