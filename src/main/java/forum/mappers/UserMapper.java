@@ -1,13 +1,10 @@
 package forum.mappers;
 
-import forum.model.Role;
 import forum.model.User;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collections;
-import java.util.HashSet;
 
 public class UserMapper implements RowMapper<User> {
 
@@ -26,7 +23,6 @@ public class UserMapper implements RowMapper<User> {
                 .username(rs.getString(NAME_MAPPER))
                 .password(rs.getString(PASSWORD_MAPPER))
                 .email(rs.getString(EMAIL_MAPPER))
-                .userRoles(new HashSet<>(Collections.singletonList(new Role(rs.getInt(ROLE_ID_MAPPER), rs.getString(ROLE_NAME_MAPPER)))))
                 .build();
     }
 }

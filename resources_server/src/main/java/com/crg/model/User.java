@@ -1,10 +1,8 @@
 package com.crg.model;
 
-
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.crg.annotation.ValidEmail;
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.*;
-
-import java.util.Set;
 
 @Getter
 @Setter
@@ -13,22 +11,19 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
-    public User(User other) {
-        this(other.id, other.username, other.email, other.password, other.active, other.userRoles);
-    }
+    @JsonView(Views.Public.class)
+    private Integer id;
 
-    private int id;
-
-    @NonNull
+    @JsonView(Views.Public.class)
     private String username;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonView(Views.AdminOnly.class)
+    @ValidEmail
     private String email;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonView(Views.AdminOnly.class)
     private String password;
 
-    private int active;
-
-    private Set<Role> userRoles;
+    @JsonView(Views.Public.class)
+    private Boolean accountActivated;
 }

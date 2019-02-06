@@ -31,6 +31,8 @@ public class UserRepository {
     @Value("${persistence.member.get_member_by_username}")
     private String getUserByUsernameQueryString;
 
+    @Value("${persistence.member.get_member_by_email}")
+    private String getUserByEmailQueryString;
 
     public List<User> getAllMembers() {
         return jdbcTemplate.query(getAllMembersSqlQuery, userMapper);
@@ -53,4 +55,15 @@ public class UserRepository {
             return Optional.empty();
         }
     }
+
+    public Optional<User> getUserByEmail(final String email) {
+        try {
+            return Optional.ofNullable(jdbcTemplate.queryForObject(getUserByEmailQueryString, new Object[]{email}, userMapper));
+        }
+        catch(EmptyResultDataAccessException ex) {
+            return Optional.empty();
+        }
+    }
+
+
 }

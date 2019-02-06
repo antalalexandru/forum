@@ -13,10 +13,6 @@ import java.util.Set;
 @NoArgsConstructor
 public class User {
 
-    public User(User other) {
-        this(other.id, other.username, other.email, other.password, other.active, other.userRoles);
-    }
-
     private int id;
 
     @NonNull
@@ -30,5 +26,4 @@ public class User {
 
     private int active;
 
-    private Set<Role> userRoles;
 }
