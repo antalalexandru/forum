@@ -26,7 +26,6 @@ public class UserMapper implements RowMapper<User> {
                 .username(rs.getString(NAME_MAPPER))
                 .password(rs.getString(PASSWORD_MAPPER))
                 .email(rs.getString(EMAIL_MAPPER))
-                .userRoles(new HashSet<>(Collections.singletonList(new Role(rs.getInt(ROLE_ID_MAPPER), rs.getString(ROLE_NAME_MAPPER)))))
                 .build();
     }
 }

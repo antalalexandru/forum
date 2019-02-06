@@ -24,16 +24,13 @@ public class UserController {
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
     @JsonView(Views.Public.class)
-    @ApiOperation(value="Add a new user", response = User.class)
+    @ApiOperation(value="Add a new user", response = User.class, code = 201)
     @ApiResponses({
             @ApiResponse(code = 201, message = "User was successfully added"),
-            @ApiResponse(code = 409, message = "Username already exists"),
-            @ApiResponse(code = 409, message = "Email already exists"),
-            @ApiResponse(code = 400, message = "Username is invalid (contains unaccepted characters or is too long)"),
-            @ApiResponse(code = 400, message = "Email is invalid")
+            @ApiResponse(code = 409, message = "Username or email already exists"),
+            @ApiResponse(code = 422, message = "Invalid user data")
     })
     public User createUser(@RequestBody @Valid UserDto user) {
         return userService.addUser(user);
     }
-
 }

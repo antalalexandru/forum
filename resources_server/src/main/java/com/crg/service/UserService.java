@@ -18,7 +18,7 @@ public class UserService {
         User savedUser = User
                 .builder()
                 .username(userDto.getUsername())
-                .password(passwordEncoder.encode(userDto.getPlainTextPassword()))
+                .password(passwordEncoder.encode(userDto.getPassword()))
                 .email(userDto.getEmail())
                 .accountActivated(false)
                 .build();

@@ -1,6 +1,5 @@
 package com.crg.model;
 
-import com.crg.annotation.ValidEmail;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.*;
 
@@ -18,7 +17,6 @@ public class User {
     private String username;
 
     @JsonView(Views.AdminOnly.class)
-    @ValidEmail
     private String email;
 
     @JsonView(Views.AdminOnly.class)
