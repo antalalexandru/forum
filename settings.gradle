@@ -1,2 +1,4 @@
 rootProject.name = 'forum'
+include 'oauth_authorization_server'
+include 'resources_server'
 
